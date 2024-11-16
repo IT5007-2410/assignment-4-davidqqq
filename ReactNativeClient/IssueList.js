@@ -94,6 +94,8 @@ function IssueRow(props) {
         <View style={{ flex: 1, }}><Text>{issue.title}</Text></View>
         <View style={{ flex: 1, }}><Text>{issue.status}</Text></View>
         <View style={{ flex: 1, }}><Text>{issue.owner}</Text></View>
+        <View style={{ flex: 1, }}><Text>{issue.effort}</Text></View>
+        <View style={{ flex: 1, }}><Text>{new Date(issue.due).toISOString()}</Text></View>
         <View style={{ flex: 1, }}><Text>{new Date(issue.created).toISOString()}</Text></View>
       </View>
       {/****** Q2: Coding Ends here. ******/}
@@ -120,7 +122,10 @@ function IssueTable(props) {
         <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Title</Text></View>
         <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Status</Text></View>
         <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Owner</Text></View>
+        <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Effort</Text></View>
+        <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Due</Text></View>
         <View style={{ flex: 1, alignSelf: 'stretch' }} ><Text style={styles.text}>Created</Text></View>
+
       </View>
       <ScrollView>
         <IssueRows issues={props.issues} />
@@ -136,7 +141,10 @@ class IssueAdd extends React.Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     /****** Q3: Start Coding here. Create State to hold inputs******/
-    this.state = { title: '', owner: '' };
+    this.state = {
+      title: '', owner: '', effort: '', due: ''
+
+    };
     /****** Q3: Code Ends here. ******/
   }
 
@@ -145,20 +153,28 @@ class IssueAdd extends React.Component {
 
   handleSubmit() {
     /****** Q3: Start Coding here. Create an issue from state variables and call createIssue. Also, clear input field in front-end******/
-    const issue = { title: this.state.title, owner: this.state.owner };
+    const issue = {
+      title: this.state.title, owner: this.state.owner
+      , effort: this.state.effort, due: this.state.due
+    };
     this.props.createIssue(issue);
-    this.setState({ title: '', owner: '' });
+    this.setState({
+      title: '', owner: '', effort: '', due: ''
+
+    });
     /****** Q3: Code Ends here. ******/
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ ...styles.container, flex: 2 }}>
         {/****** Q3: Start Coding here. Create TextInput field, populate state variables. Create a submit button, and on submit, trigger handleSubmit.*******/}
         <Text>Add Issue</Text>
         <Text>Title</Text>
         <TextInput placeholder="Title" value={this.state.title} onChangeText={(title) => this.setState({ title })} />
         <Text>Owner</Text><TextInput placeholder="Owner" value={this.state.owner} onChangeText={(owner) => this.setState({ owner })} />
+        <Text>Effort</Text><TextInput placeholder="Effort" value={this.state.effort} onChangeText={(effort) => this.setState({ effort })} />
+        <Text>Due</Text><TextInput placeholder="Due" value={this.state.due} onChangeText={(due) => this.setState({ due })} />
         <Button title="Submit" onPress={this.handleSubmit} />
 
         {/****** Q3: Code Ends here. ******/}
