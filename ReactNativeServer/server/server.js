@@ -5,7 +5,7 @@ const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 const { MongoClient } = require('mongodb');
 
-const url = 'mongodb://localhost/issuetracker';
+const url = 'mongodb://localhost:27017/issuetracker';
 
 // Atlas URL  - replace UUU with user, PPP with password, XXX with hostname
 // const url = 'mongodb+srv://UUU:PPP@cluster0-XXX.mongodb.net/issuetracker?retryWrites=true';
@@ -48,9 +48,9 @@ const resolvers = {
   GraphQLDate,
 };
 
-async function addToBlacklist(_, {nameInput}) {
+async function addToBlacklist(_, { nameInput }) {
 
-  const result = await db.collection('blacklist').insertOne({name: nameInput});
+  const result = await db.collection('blacklist').insertOne({ name: nameInput });
 }
 
 function setAboutMessage(_, { message }) {
@@ -59,6 +59,7 @@ function setAboutMessage(_, { message }) {
 
 async function issueList() {
   const issues = await db.collection('issues').find({}).toArray();
+  console.log(issues)
   return issues;
 }
 
