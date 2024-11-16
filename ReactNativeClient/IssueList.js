@@ -53,7 +53,9 @@ class IssueFilter extends React.Component {
     return (
       <>
         {/****** Q1: Start Coding here. ******/}
-
+        <Button title="Filter by title"><Text>Filter by title</Text></Button>
+        <Button title="Filter by owner"><Text>Filter by owner</Text></Button>
+        <Button title="Filter by status"><Text>Filter by status</Text></Button>
         {/****** Q1: Code ends here ******/}
       </>
     );
