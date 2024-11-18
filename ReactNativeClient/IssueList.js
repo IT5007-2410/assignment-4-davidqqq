@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 import {
   SafeAreaView,
